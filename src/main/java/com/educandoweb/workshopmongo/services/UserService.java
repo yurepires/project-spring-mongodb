@@ -32,6 +32,12 @@ public class UserService {
     public User insert(User user) {
         return userRepository.insert(user);
     }
+
+    public void delete(String id) {
+        findById(id); // Lançar a excessão para caso não ache o user
+        userRepository.deleteById(id);
+    }
+
     public User fromDTO(UserDTO dto) {
         return new User(dto.getId(), dto.getName(), dto.getEmail());
     }
