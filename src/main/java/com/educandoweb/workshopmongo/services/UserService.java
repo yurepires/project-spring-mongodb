@@ -38,6 +38,17 @@ public class UserService {
         userRepository.deleteById(id);
     }
 
+    public User update(User user) {
+        User newUser = findById(user.getId());
+        updateData(newUser, user);
+        return userRepository.save(newUser);
+    }
+
+    private void updateData(User newUser, User oldUser) {
+        newUser.setName(oldUser.getName());
+        newUser.setEmail(oldUser.getEmail());
+    }
+
     public User fromDTO(UserDTO dto) {
         return new User(dto.getId(), dto.getName(), dto.getEmail());
     }
