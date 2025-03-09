@@ -3,6 +3,7 @@ package com.educandoweb.workshopmongo.config;
 import com.educandoweb.workshopmongo.domain.Post;
 import com.educandoweb.workshopmongo.domain.User;
 import com.educandoweb.workshopmongo.dto.AuthorDTO;
+import com.educandoweb.workshopmongo.dto.CommentDTO;
 import com.educandoweb.workshopmongo.repository.PostRepository;
 import com.educandoweb.workshopmongo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +43,13 @@ public class Instantiate implements CommandLineRunner {
 
         Post post1 = new Post(null, "Partiu viagem!", "Vou viajar para São Paulo. Abraços!", LocalDate.parse( "21/03/2018", fmt), new AuthorDTO(user3));
         Post post2 = new Post(null, "Bom dia", "Acordei feliz hoje!", LocalDate.parse( "23/03/2018", fmt), new AuthorDTO(user3));
+
+        CommentDTO c1 = new CommentDTO("Boa viagem mana!", LocalDate.parse("21/03/2018", fmt), new AuthorDTO(user2));
+        CommentDTO c2 = new CommentDTO("Aproveite!", LocalDate.parse("22/03/2018", fmt), new AuthorDTO(user1));
+        CommentDTO c3 = new CommentDTO("Tenha um ótimo dia!", LocalDate.parse("23/03/2018", fmt), new AuthorDTO(user2));
+
+        post1.getComments().addAll(Arrays.asList(c1, c2));
+        post2.getComments().add(c3);
 
         postRepository.saveAll(Arrays.asList(post1, post2));
 
